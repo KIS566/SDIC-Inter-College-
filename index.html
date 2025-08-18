@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="शंभू दयाल इंटर कॉलेज - प्रयागराज का प्रमुख शैक्षणिक संस्थान">
+    <meta name="keywords" content="स्कूल, इंटर कॉलेज, प्रयागराज, शिक्षा, नामांकन">
+    <title>शंभू दयाल इंटर कॉलेज</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Hind:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-messaging-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    
+    
+    <!-- Loading Spinner -->
+<div id="loading-spinner" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #4285F4; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999;">
+    <div style="position: relative; width: 75px; height: 100px;">
+        <div style="position: absolute; bottom: 0; width: 10px; height: 50%; background: #fff; transform-origin: center bottom; box-shadow: 1px 1px 0 rgba(0,0,0,.2); left: 0px; transform: scale(1,0.2); animation: barUp1 4s infinite;"></div>
+        <div style="position: absolute; bottom: 0; width: 10px; height: 50%; background: #fff; transform-origin: center bottom; box-shadow: 1px 1px 0 rgba(0,0,0,.2); left: 15px; transform: scale(1,0.4); animation: barUp2 4s infinite;"></div>
+        <div style="position: absolute; bottom: 0; width: 10px; height: 50%; background: #fff; transform-origin: center bottom; box-shadow: 1px 1px 0 rgba(0,0,0,.2); left: 30px; transform: scale(1,0.6); animation: barUp3 4s infinite;"></div>
+        <div style="position: absolute; bottom: 0; width: 10px; height: 50%; background: #fff; transform-origin: center bottom; box-shadow: 1px 1px 0 rgba(0,0,0,.2); left: 45px; transform: scale(1,0.8); animation: barUp4 4s infinite;"></div>
+        <div style="position: absolute; bottom: 0; width: 10px; height: 50%; background: #fff; transform-origin: center bottom; box-shadow: 1px 1px 0 rgba(0,0,0,.2); left: 60px; transform: scale(1,1); animation: barUp5 4s infinite;"></div>
+        <div style="position: absolute; bottom: 10px; left: 0; width: 10px; height: 10px; background: #fff; border-radius: 50%; animation: ball 4s infinite;"></div>
+    </div>
+    <div style="color: white; margin-top: 20px; font-size: 18px; font-weight: bold;">शंभू दयाल इंटर कॉलेज</div>
+</div>
+
+<style>
+    /* Add these animations to your CSS */
+    @keyframes ball {
+        0% { transform: translate(0, 0); }
+        5% { transform: translate(8px, -14px); }
+        10% { transform: translate(15px, -10px); }
+        17% { transform: translate(23px, -24px); }
+        20% { transform: translate(30px, -20px); }
+        27% { transform: translate(38px, -34px); }
+        30% { transform: translate(45px, -30px); }
+        37% { transform: translate(53px, -44px); }
+        40% { transform: translate(60px, -40px); }
+        50% { transform: translate(60px, 0); }
+        57% { transform: translate(53px, -14px); }
+        60% { transform: translate(45px, -10px); }
+        67% { transform: translate(37px, -24px); }
+        70% { transform: translate(30px, -20px); }
+        77% { transform: translate(22px, -34px); }
+        80% { transform: translate(15px, -30px); }
+        87% { transform: translate(7px, -44px); }
+        90% { transform: translate(0, -40px); }
+        100% { transform: translate(0, 0); }
+    }
+
+    @keyframes barUp1 { 
+        0% { transform: scale(1, 0.2); }
+        40% { transform: scale(1, 0.2); }
+        50% { transform: scale(1, 1); }
+        90% { transform: scale(1,1); }
+        100% { transform: scale(1,0.2); }
+    }
+    @keyframes barUp2 { 
+        0% { transform: scale(1, 0.4); }
+        40% { transform: scale(1, 0.4); }
+        50% { transform: scale(1, 0.8); }
+        90% { transform: scale(1, 0.8); }
+        100% { transform: scale(1, 0.4); }
+    }
+    @keyframes barUp3 { 
+        0% { transform: scale(1, 0.6); }
+        100% { transform: scale(1, 0.6); }
+    }
+    @keyframes barUp4 { 
+        0% { transform: scale(1, 0.8); }
+        40% { transform: scale(1, 0.8); }
+        50% { transform: scale(1, 0.4); }
+        90% { transform: scale(1, 0.4); }
+        100% { transform: scale(1, 0.8); }
+    }
+    @keyframes barUp5 { 
+        0% { transform: scale(1, 1); }
+        40% { transform: scale(1, 1); }
+        50% { transform: scale(1, 0.2); }
+        90% { transform: scale(1, 0.2); }
+        100% { transform: scale(1, 1); }
+    }
+</style>
+
+    
+<!-- Header Section -->
+<center><header>
+   <br>        
+   <img src="https://raw.githubusercontent.com/KIS566/my-image/main/logo.png" alt="शंभू दयाल इंटर कॉलेज" class="logo">
+</header>
+
+<div class="nav-container">
+    <div class="nav-buttons-container">
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="showSection('home')">
+                <i class="fas fa-home"></i> होम
+            </button>
+            <button class="nav-btn" onclick="showSection('about')">
+                <i class="fas fa-info-circle"></i> हमारे बारे में
+            </button>
+            <button class="nav-btn" onclick="showSection('staff')">
+                <i class="fas fa-users"></i> हमारे स्टाफ
+            </button>
+            <button class="nav-btn" onclick="showSection('subjects')">
+                <i class="fas fa-book"></i> विषय
+            </button>
+            <button class="nav-btn" onclick="showSection('notifications')">
+                <i class="fas fa-bell"></i> सूचनाएं
+            </button>
+            <button class="nav-btn" onclick="showSection('events')">
+                <i class="fas fa-calendar-alt"></i> इवेंट्स
+            </button>
+            <button class="nav-btn" onclick="showSection('gallery')">
+                <i class="fas fa-images"></i> गैलरी
+            </button>
+            <button class="nav-btn" onclick="showSection('enrollment')">
+                <i class="fas fa-edit"></i> नामांकन
+            </button>
+            <button class="nav-btn" onclick="showSection('contact')">
+                <i class="fas fa-phone"></i> संपर्क
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Home Section -->
+    <div id="home">
+        <div class="hero-section">
+            <h1 class="hero-title"> शम्भु दयाल इंटर कॉलेज में आपका स्वागत है</h1>
+            <p class="hero-subtitle">हम छात्रों को उत्कृष्ट शिक्षा और संपूर्ण विकास के अवसर प्रदान करते हैं</p>
+            <a href="#" class="cta-button" onclick="showSection('enrollment')">नामांकन के लिए आवेदन करें</a>
+        </div>
+        
+        <h2 class="section-title">हमारी विशेष सुविधाएं</h2>
+        
+        <div class="features-grid">
+            <div class="feature-box" onclick="showSection('staff')">
+                <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                <h3>अनुभवी शिक्षक</h3>
+                <p>योग्य और समर्पित शिक्षकों द्वारा गुणवत्तापूर्ण शिक्षा</p>
+            </div>
+            
+            <div class="feature-box" onclick="showSection('subjects')">
+                <div class="feature-icon"><i class="fas fa-book-open"></i></div>
+                <h3>व्यापक पाठ्यक्रम</h3>
+                <p>सभी कक्षाओं के लिए विस्तृत विषय विकल्प</p>
+            </div>
+            
+            <div class="feature-box" onclick="showSection('gallery')">
+                <div class="feature-icon"><i class="fas fa-camera"></i></div>
+                <h3>आधुनिक सुविधाएं</h3>
+                <p>स्मार्ट क्लासरूम और अत्याधुनिक प्रयोगशालाएं</p>
+            </div>
+            
+            <div class="feature-box" onclick="showSection('events')">
+                <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+                <h3>पाठ्येतर गतिविधियाँ</h3>
+                <p>खेल, सांस्कृतिक कार्यक्रम और प्रतियोगिताएं</p>
+            </div>
+        </div>
+        
+        <!-- Gallery Preview Section -->
+        <div class="gallery-container">
+            <h2 class="section-title">हमारी गैलरी</h2>
+            <p style="text-align: center; margin-bottom: 20px;">स्कूल की विभिन्न गतिविधियों की झलक</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/my-image/main/banner1.jpg')">
+                    <img src="https://raw.githubusercontent.com/KIS566/my-image/main/banner1.jpg" class="gallery-img">
+                    <div class="gallery-caption"></div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/my-image/main/banner10.jpg')">
+                    <img src="https://raw.githubusercontent.com/KIS566/my-image/main/banner10.jpg" class="gallery-img">
+                    <div class="gallery-caption"></div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/my-image/main/banner2.jpg')">
+                    <img src="https://raw.githubusercontent.com/KIS566/my-image/main/banner2.jpg" class="gallery-img">
+                    <div class="gallery-caption"></div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/my-image/main/banner3.jpg')">
+                    <img src="https://raw.githubusercontent.com/KIS566/my-image/main/banner3.jpg" class="gallery-img">
+                    <div class="gallery-caption"></div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="cta-button" onclick="showSection('gallery')">पूरी गैलरी देखें</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- About Section -->
+    <div id="about" class="hidden">
+        <h2 class="section-title">हमारे बारे में</h2>
+        
+        <div class="about-section">
+            <p>शंभू दयाल इंटर कॉलेज 1995 में स्थापित एक प्रतिष्ठित शैक्षणिक संस्थान है। हमारा उद्देश्य छात्रों को गुणवत्तापूर्ण शिक्षा प्रदान करना और उनका सर्वांगीण विकास करना है। हमारे पास अनुभवी शिक्षकों की एक समर्पित टीम है जो छात्रों को शैक्षणिक और नैतिक मूल्यों से परिपूर्ण बनाने के लिए प्रतिबद्ध है।</p>
+            
+            <div class="mission-vision">
+                <div class="mission-box">
+                    <h3>हमारा मिशन</h3>
+                    <p>छात्रों को गुणवत्तापूर्ण शिक्षा प्रदान करना जो उन्हें जीवन की चुनौतियों का सामना करने के लिए तैयार करे और उन्हें जिम्मेदार नागरिक बनने में मदद करे।</p>
+                </div>
+                
+                <div class="vision-box">
+                    <h3>हमारी दृष्टि</h3>
+                    <p>एक ऐसा शैक्षणिक वातावरण बनाना जहाँ प्रत्येक छात्र अपनी क्षमताओं का पूर्ण विकास कर सके और समाज के लिए योगदान देने के लिए प्रेरित हो।</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="about-section">
+            <h3>हमारी सुविधाएं</h3>
+            <ul style="list-style-type: none; padding-left: 0;">
+                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--secondary);"></i> अच्छी तरह से सुसज्जित कक्षाएं</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--secondary);"></i> विज्ञान और कंप्यूटर प्रयोगशालाएं</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--secondary);"></i> विशाल पुस्तकालय</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--secondary);"></i> खेल के मैदान और खेल सुविधाएं</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--secondary);"></i> स्मार्ट क्लासरूम</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--secondary);"></i> स्वच्छ पेयजल और स्वच्छता सुविधाएं</li>
+            </ul>
+        </div>
+        
+        <button class="back-btn" onclick="showSection('home')">वापस जाएँ</button>
+    </div>
+    
+  
+    <!-- Staff Section -->
+<div id="staff" class="hidden">
+
+    <!-- Principal Info - Enhanced -->
+    <div class="principal-info">
+        <div class="principal-img-container">
+            <img src="https://raw.githubusercontent.com/KIS566/my-image/main/principal1.jpg" alt="प्राचार्य" class="principal-img">
+        </div>
+        <div class="principal-details">
+            <h2 class="principal-name">डॉ. देवेंद्र कुमार</h2>
+            <div class="principal-info-item">
+                <span class="principal-info-label">पदनाम:</span>
+                <span>प्रधानाचार्य</span>
+            </div>
+            <div class="principal-info-item">
+                <span class="principal-info-label">शिक्षा:</span>
+                <span>पीएचडी (मनोविज्ञान), एम.एड.</span>
+            </div>
+            <div class="principal-info-item">
+                <span class="principal-info-label">अनुभव:</span>
+                <span>25 वर्ष</span>
+            </div>
+            <div class="principal-message">
+                <i class="fas fa-quote-left" style="color: var(--accent); margin-right: 5px;"></i>
+                हमारा उद्देश्य छात्रों का सर्वांगीण विकास करना है। शिक्षा के माध्यम से हम उन्हें जिम्मेदार नागरिक बनने के लिए तैयार करते हैं।
+                <i class="fas fa-quote-right" style="color: var(--accent); margin-left: 5px;"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Staff List (JSON से लोड होगी) -->
+    <h2 class="section-title">हमारे स्टाफ सदस्य</h2>
+    <div id="staff-container"></div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const staffContainer = document.getElementById("staff-container");
+
+    fetch("staff.json")
+        .then(response => response.json())
+        .then(data => {
+            let html = "";
+
+            // हर category loop करो
+            Object.keys(data).forEach(category => {
+                html += `<h3 class="staff-category-title">${category}</h3>`;
+                html += `<div class="staff-table-container"><table class="staff-table"><thead>
+                            <tr>
+                                <th>क्र.स.</th>
+                                <th>फोटो</th>
+                                <th>नाम</th>
+                                <th>पदनाम</th>
+                            </tr>
+                         </thead><tbody>`;
+
+                data[category].forEach((staff, index) => {
+                    html += `
+                        <tr onclick="openStaffModal('${staff.name}', '${staff.post}', '', '', '${staff.photo}')">
+                            <td>${index + 1}</td>
+                            <td><img src="${staff.photo}" class="table-staff-img"></td>
+                            <td>${staff.name}</td>
+                            <td>${staff.post}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `</tbody></table></div>`;
+            });
+
+            staffContainer.innerHTML = html;
+        })
+        .catch(error => {
+            console.error("Error loading staff:", error);
+            staffContainer.innerHTML = "<p style='color:red;'>स्टाफ डेटा लोड करने में समस्या आ रही है।</p>";
+        });
+});
+</script>
+
+
+    <!-- Events Section -->
+    <div id="events" class="hidden">
+        <div class="event-container">
+            <h2 class="section-title">आगामी स्कूल इवेंट्स</h2>
+            <div id="events-list">
+                <!-- Events will be loaded from Firebase -->
+               
+            </div>
+        </div>
+        
+        <button class="back-btn" onclick="showSection('home')">वापस जाएँ</button>
+    </div>
+    
+    <!-- Gallery Section -->
+<div id="gallery" class="hidden">
+    <div class="gallery-container">
+        <h2 class="section-title">स्कूल गैलरी</h2>
+        <p style="text-align: center; margin-bottom: 20px;">स्कूल की विभिन्न गतिविधियों की झलक</p>
+        
+        <div class="gallery-grid">
+            <!-- Existing 5 gallery items -->
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/my-image/main/banner1.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/my-image/main/banner1.jpg" alt="banner1" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/my-image/main/banner2.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/my-image/main/banner2.jpg" alt="banner2" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/my-image/main/banner3.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/my-image/main/banner3.jpg" alt="banner3" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/my-image/main/banner4.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/my-image/main/banner4.jpg" alt="banner4" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/my-image/main/banner10.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/my-image/main/banner10.jpg" alt="banner10" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <!-- New gallery items with your provided images -->
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0027.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0027.jpg" alt="gallery1" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0028.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0028.jpg" alt="gallery2" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0029.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0029.jpg" alt="gallery3" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0030.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0030.jpg" alt="gallery4" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0032.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0032.jpg" alt="gallery5" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0033.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0033.jpg" alt="gallery6" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0035.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0035.jpg" alt="gallery7" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0036.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0036.jpg" alt="gallery8" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0037.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0037.jpg" alt="gallery9" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0038.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0038.jpg" alt="gallery10" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0043.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0043.jpg" alt="gallery11" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0044.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0044.jpg" alt="gallery12" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0045.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0045.jpg" alt="gallery13" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0046.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0046.jpg" alt="gallery14" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0051.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0051.jpg" alt="gallery15" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0052.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0052.jpg" alt="gallery16" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0053.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0053.jpg" alt="gallery17" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0059.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0059.jpg" alt="gallery18" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0060.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0060.jpg" alt="gallery19" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0061.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0061.jpg" alt="gallery20" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0062.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0062.jpg" alt="gallery21" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0063.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0063.jpg" alt="gallery22" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal('https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0068.jpg')">
+                <img src="https://raw.githubusercontent.com/KIS566/Images22/main/IMG-20250718-WA0068.jpg" alt="gallery23" class="gallery-img">
+                <div class="gallery-caption"></div>
+            </div>
+            
+            <!-- Remaining 3 items (24-26) can be added if you provide more images -->
+        </div>
+    </div>
+    
+    <button class="back-btn" onclick="showSection('home')">वापस जाएँ</button>
+</div>
+    <!-- Enrollment Section -->
+    <div id="enrollment" class="hidden">
+        <div class="enrollment-form">
+            <h2>ऑनलाइन नामांकन फॉर्म</h2>
+            
+            <form id="enrollmentForm" action="https://formspree.io/f/xovebyjq" method="POST">
+                <!-- Form fields here -->
+            <!-- Student Information -->
+ <div class="form-group">
+     <label for="studentName">छात्र का नाम (हिंदी में)</label>
+     <input type="text" id="studentName" name="studentName" required>
+ </div>
+ 
+ <div class="form-group">
+     <label for="studentNameEnglish">छात्र का नाम (अंग्रेजी में)</label>
+     <input type="text" id="studentNameEnglish" name="studentNameEnglish" required>
+ </div>
+ 
+ <div class="form-group">
+     <label for="fatherName">पिता का नाम</label>
+     <input type="text" id="fatherName" name="fatherName" required>
+ </div>
+ 
+ <div class="form-group">
+     <label for="motherName">माता का नाम</label>
+     <input type="text" id="motherName" name="motherName" required>
+ </div>
+ 
+ <div class="form-group">
+     <label for="dob">जन्म तिथि</label>
+     <input type="date" id="dob" name="dob" required>
+ </div>
+ 
+ <div class="form-group">
+     <label for="gender">लिंग</label>
+     <select id="gender" name="gender" required>
+         <option value="">-- चयन करें --</option>
+         <option value="male">पुरुष</option>
+         <option value="female">महिला</option>
+         <option value="other">अन्य</option>
+     </select>
+ </div>
+ 
+ <div class="form-group">
+     <label for="aadhar">आधार नंबर (यदि उपलब्ध हो)</label>
+     <input type="text" id="aadhar" name="aadhar" pattern="[0-9]{12}" title="12 अंकों का आधार नंबर">
+ </div>
+ 
+ <!-- Academic Information -->
+ <div class="form-group">
+     <label for="class">कक्षा</label>
+     <select id="class" name="class" required onchange="updateSubjectOptions()">
+         <option value="">-- चयन करें --</option>
+         <option value="6">कक्षा 6</option>
+         <option value="7">कक्षा 7</option>
+         <option value="8">कक्षा 8</option>
+         <option value="9">कक्षा 9</option>
+         <option value="10">कक्षा 10</option>
+         <option value="11">कक्षा 11</option>
+         <option value="12">कक्षा 12</option>
+     </select>
+ </div>
+ 
+ <div class="form-group" id="streamGroup" style="display:none;">
+     <label for="stream">संकाय (केवल कक्षा 11-12)</label>
+     <select id="stream" name="stream" onchange="updateSubjectOptions()">
+         <option value="">-- चयन करें --</option>
+         <option value="science">विज्ञान</option>
+         <option value="commerce">वाणिज्य</option>
+         <option value="arts">कला</option>
+     </select>
+ </div>
+ 
+ <div class="form-group" id="subjectGroup" style="display:none;">
+     <label>विषय चयन</label>
+     <div id="subjectOptions"></div>
+ </div>
+ 
+ <!-- Contact Information -->
+ <div class="form-group">
+     <label for="address">पता</label>
+     <textarea id="address" name="address" rows="3" required></textarea>
+ </div>
+ 
+ <div class="form-group">
+     <label for="city">शहर/गाँव</label>
+     <input type="text" id="city" name="city" required>
+ </div>
+ 
+ <div class="form-group">
+     <label for="district">जिला</label>
+     <input type="text" id="district" name="district" required>
+ </div>
+ 
+ <div class="form-group">
+     <label for="state">राज्य</label>
+     <input type="text" id="state" name="state" required value="उत्तर प्रदेश">
+ </div>
+ 
+ <div class="form-group">
+     <label for="pincode">पिन कोड</label>
+     <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" title="6 अंकों का पिन कोड" required>
+ </div>
+ 
+ <div class="form-group">
+     <label for="phone">मोबाइल नंबर (अभिभावक)</label>
+     <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="10 अंकों का मोबाइल नंबर" required>
+ </div>
+ 
+ <div class="form-group">
+     <label for="alternatePhone">वैकल्पिक मोबाइल नंबर</label>
+     <input type="tel" id="alternatePhone" name="alternatePhone" pattern="[0-9]{10}" title="10 अंकों का मोबाइल नंबर">
+ </div>
+ 
+ <div class="form-group">
+     <label for="email">ईमेल</label>
+     <input type="email" id="email" name="email">
+ </div>
+ 
+ <!-- Previous Academic Information -->
+ <div class="form-group">
+     <label for="previousSchool">पिछले स्कूल का नाम (यदि कोई हो)</label>
+     <input type="text" id="previousSchool" name="previousSchool">
+ </div>
+ 
+ <div class="form-group">
+     <label for="previousClass">पिछली कक्षा</label>
+     <input type="text" id="previousClass" name="previousClass">
+ </div>
+ 
+ <div class="form-group">
+     <label for="previousPercentage">पिछली कक्षा में प्राप्त प्रतिशत</label>
+     <input type="number" id="previousPercentage" name="previousPercentage" min="0" max="100" step="0.01">
+ </div>
+ 
+ <!-- Documents Upload -->
+ <div class="form-group">
+     <label>आवश्यक दस्तावेज (नामांकन के समय जमा करने होंगे)</label>
+     <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 5px;">
+         <ul style="list-style-type: none; padding-left: 0;">
+             <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: var(--accent);"></i> जन्म प्रमाण पत्र</li>
+             <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: var(--accent);"></i> आधार कार्ड (छात्र एवं अभिभावक)</li>
+             <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: var(--accent);"></i> पिछली कक्षा की मार्कशीट</li>
+             <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: var(--accent);"></i> निवास प्रमाण पत्र</li>
+             <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: var(--accent);"></i> जाति प्रमाण पत्र (यदि लागू हो)</li>
+             <li><i class="fas fa-check-circle" style="color: var(--accent);"></i> पासपोर्ट साइज फोटो (4 कॉपी)</li>
+         </ul>
+     </div>
+ </div>
+ 
+ <!-- Declaration -->
+ <div class="form-group">
+     <label style="display: flex; align-items: flex-start;">
+         <input type="checkbox" id="declaration" name="declaration" required style="margin-right: 10px; margin-top: 3px;">
+         <span>मैं घोषणा करता/करती हूँ कि उपरोक्त दी गई सभी जानकारी सही है। गलत जानकारी देने पर मेरा नामांकन रद्द किया जा सकता है।</span>
+     </label>
+ </div>
+ 
+ <!-- Formspree hidden fields -->
+ <input type="hidden" name="_subject" value="नया नामांकन फॉर्म - शंभू दयाल इंटर कॉलेज">
+ <input type="hidden" name="_language" value="hi">
+ <input type="text" name="_gotcha" style="display:none;">
+ 
+ <button type="submit" class="btn btn-primary">सबमिट करें</button>
+ </form>
+ 
+ <div class="status-message" id="statusMessage"></div>
+ </div>
+ 
+ <button class="back-btn" onclick="showSection('home')">वापस जाएँ</button>
+ </div>
+    <!-- Contact Section -->
+    <div id="contact" class="hidden">
+        <h2 class="section-title">संपर्क करें</h2>
+        
+        <div class="about-section">
+            <p>शंभू दयाल इंटर कॉलेज से संपर्क करने के लिए नीचे दी गई जानकारी का उपयोग करें। आप हमें फोन, ईमेल या व्यक्तिगत रूप से मिलकर संपर्क कर सकते हैं।</p>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>पता</h3>
+                    <p>मुख्य रोड, शिवपुरी कॉलोनी<br>जिला - प्रयागराज<br>उत्तर प्रदेश - 211011</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>फोन नंबर</h3>
+                    <p>93355121175<br>7669611751</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>ईमेल</h3>
+                    <p>K9891p@gmail.com<br></p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>कार्यालय समय</h3>
+                    <p>सोमवार - शुक्रवार<br>सुबह 8:00 - दोपहर 3:00</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.489674635717!2d81.8700573150141!3d25.4499839837798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399acb0e20f3f1f9%3A0x9f41f5d7f8f6e9b8!2sShambhu%20Dayal%20Inter%20College!5e0!3m2!1sen!2sin!4v1719040000000!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        
+        <button class="back-btn" onclick="showSection('home')">वापस जाएँ</button>
+    </div>
+</div>
+
+<!-- Image Modal -->
+<div class="modal" id="imageModal">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        <img id="modalImage" class="modal-img" alt="Enlarged view">
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>हमारे बारे में</h3>
+            <p>शंभू दयाल इंटर कॉलेज 1995 से शिक्षा के क्षेत्र में उत्कृष्टता का प्रतीक है। हम छात्रों का सर्वांगीण विकास सुनिश्चित करने के लिए प्रतिबद्ध हैं।</p>
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        
+        <div class="footer-section">
+            <h3>त्वरित लिंक</h3>
+            <ul class="footer-links">
+                <li><a href="#" onclick="showSection('home')"><i class="fas fa-arrow-right"></i> होम</a></li>
+                <li><a href="#" onclick="showSection('about')"><i class="fas fa-arrow-right"></i> हमारे बारे में</a></li>
+                <li><a href="#" onclick="showSection('staff')"><i class="fas fa-arrow-right"></i> हमारे स्टाफ</a></li>
+                <li><a href="#" onclick="showSection('notifications')"><i class="fas fa-arrow-right"></i> सूचनाएं</a></li>
+                <li><a href="#" onclick="showSection('enrollment')"><i class="fas fa-arrow-right"></i> नामांकन</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section">
+            <h3>संपर्क करें</h3>
+            <ul class="footer-links">
+                <li><a href="#"><i class="fas fa-map-marker-alt"></i> मुख्य रोड, शिवपुरी कॉलोनी, प्रयागराज</a></li>
+                <li><a href="tel:93355121175"><i class="fas fa-phone-alt"></i> 93355121175</a></li>
+                <li><a href="mailto:K9891p@gmail.com"><i class="fas fa-envelope"></i> K9891p@gmail.com</a></li>
+                <li><a href="#"><i class="fas fa-clock"></i> सोम-शुक्र: 8:00 AM - 3:00 PM</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="copyright">
+        <p>© 2023 शंभू दयाल इंटर कॉलेज. सर्वाधिकार सुरक्षित.</p>
+        <p>विकसित: स्कूल वेब टीम</p>
+    </div>
+</footer>
+
+<!-- Principal Profile -->
+<div class="principal-profile" id="principalProfile">
+    <span class="principal-close-btn" onclick="closePrincipalProfile()">&times;</span>
+    
+    <div class="principal-header">
+        <img src="https://raw.githubusercontent.com/KIS566/my-image/main/principal1.jpg" alt="Principal" class="principal-profile-image">
+        <h1 class="principal-name">डॉ. देवेंद्र कुमार</h1>
+        <div class="principal-title">प्रधानाचार्य, शंभू दयाल इंटर कॉलेज</div>
+        <div class="principal-stats">
+            <div class="stat-item">
+                <i class="fas fa-user-graduate"></i> 25+ वर्ष अनुभव
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-university"></i> 5+ संस्थानों में सेवा
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-award"></i> 10+ पुरस्कार
+            </div>
+        </div>
+    </div>
+    
+    <div class="principal-content">
+        <!-- Principal profile content here -->
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+
+<script>
+    // Hide spinner after 4 seconds and show main content
+    setTimeout(function() {
+        document.getElementById('loading-spinner').style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }, 4000); // 4000 milliseconds = 4 seconds
+    
+    // Initially hide the body content to prevent flickering
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.style.overflow = 'hidden'; // Disable scrolling during loading
+    });
+</script>
+</body>
+</html>

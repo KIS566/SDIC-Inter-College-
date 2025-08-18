@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.kis566.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Shambhu Dayal Inter College</name>
+  <description>Shambhu Dayal Inter College</description>
+  <author email="k9891p@gmail.com" href="https://kis566.github.io/App">KIS566</author>
+  <icon src="res/icon.png" />
+</widget>

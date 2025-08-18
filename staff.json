@@ -1,0 +1,74 @@
+{
+  "प्रवक्ता": [
+    { "photo": "images/sudhir.jpg", "name": "श्री सुधीर कुमार वर्मा", "post": "प्रवक्ता" },
+    { "photo": "images/kishanlal.jpg", "name": "श्री किशन लाल", "post": "प्रवक्ता" },
+    { "photo": "images/sanjay1.jpg", "name": "श्री संजय कुमार", "post": "प्रवक्ता" },
+    { "photo": "images/nirdosh.jpg", "name": "श्री निर्दोष कुमार", "post": "प्रवक्ता" },
+    { "photo": "images/saroj.jpg", "name": "श्री सरोज वर्मा", "post": "प्रवक्ता" },
+    { "photo": "images/rajeev.jpg", "name": "श्री राजीव त्यागी", "post": "प्रवक्ता" },
+    { "photo": "images/sanjay2.jpg", "name": "श्री संजय कुमार", "post": "प्रवक्ता" },
+    { "photo": "images/kapil.jpg", "name": "श्री कपिल अग्रवाल", "post": "प्रवक्ता" },
+    { "photo": "images/lokesh.jpg", "name": "श्री लोकेश चंद्र शर्मा", "post": "प्रवक्ता" },
+    { "photo": "images/jayprakash.jpg", "name": "श्री जय प्रकाश", "post": "प्रवक्ता" },
+    { "photo": "images/kuldeep.jpg", "name": "श्री कुलदीप कुमार", "post": "प्रवक्ता" },
+    { "photo": "images/manju.jpg", "name": "श्रीमती मंजू बाला", "post": "प्रवक्ता" },
+    { "photo": "images/yatveer.jpg", "name": "श्री यतवीर सिंह", "post": "प्रवक्ता" },
+    { "photo": "images/satish.jpg", "name": "श्री सतीश चन्द्र", "post": "प्रवक्ता" },
+    { "photo": "images/sonia.jpg", "name": "श्रीमती सोनिया", "post": "प्रवक्ता" },
+    { "photo": "images/vipul.jpg", "name": "श्री विपुल कुमार अवस्थी", "post": "प्रवक्ता" }
+  ],
+  "सहायक_अध्यापक,": [
+    { "photo": "images/ravi.jpg", "name": "श्री रवि कुमार", "post": "सहायक अध्यापक" },
+    { "photo": "images/aanju.jpg", "name": "श्रीमती अंजु गंगवार", "post": "सहायक अध्यापक" },
+    { "photo": "images/seema.jpg", "name": "श्रीमती सीमा रानी", "post": "सहायक अध्यापक" },
+    { "photo": "images/virendra.jpg", "name": "श्री वीरेंद्र", "post": "सहायक अध्यापक" },
+    { "photo": "images/mukesh.jpg", "name": "श्री मुकेश पाल", "post": "सहायक अध्यापक" },
+    { "photo": "images/mulshankar.jpg", "name": "श्री मूल शंकर शर्मा", "post": "सहायक अध्यापक" },
+    { "photo": "images/mamta.jpg", "name": "श्रीमती ममता रानी", "post": "सहायक अध्यापक" },
+    { "photo": "images/sunita_tomar.jpg", "name": "श्रीमती सुनीता तोमर", "post": "सहायक अध्यापक" },
+    { "photo": "images/anirudra.jpg", "name": "श्री अनिरुद्ध कुमार", "post": "सहायक अध्यापक" },
+    { "photo": "images/ramnivas.jpg", "name": "श्री राम निवास शर्मा", "post": "सहायक अध्यापक" },
+    { "photo": "images/gita.jpg", "name": "श्रीमती गीता", "post": "सहायक अध्यापक" },
+    { "photo": "images/poorn.jpg", "name": "लेफ्टिनेंट पूर्ण सिंह", "post": "सहायक अध्यापक" },
+    { "photo": "images/sachin.jpg", "name": "श्री सचिन गुप्ता", "post": "सहायक अध्यापक" },
+    { "photo": "images/sanjeev.jpg", "name": "श्री संजीव कुमार शर्मा", "post": "सहायक अध्यापक" },
+    { "photo": "images/ ", "name": "श्रीमती अनिता साही", "post": "सहायक अध्यापक" },
+    { "photo": "images/kiran.jpg", "name": "श्रीमती किरण कुमारी", "post": "सहायक अध्यापक" },
+    { "photo": "images/amita.jpg", "name": "श्रीमती अमिता देवी", "post": "सहायक अध्यापक" },
+    { "photo": "images/sarita.jpg", "name": "श्रीमती सरिता देवी", "post": "सहायक अध्यापक" },
+    { "photo": "images/monika.jpg", "name": "श्रीमती मोनिका धवन", "post": "सहायक अध्यापक" },
+    { "photo": "images/rahul.jpg", "name": "श्री राहुल सिंह", "post": "सहायक अध्यापक" },
+    { "photo": "images/surendra.jpg", "name": "श्री सुरेंद्र कुमार", "post": "सहायक अध्यापक" },
+    { "photo": "images/savita.jpg", "name": "श्रीमती सविता देवी", "post": "सहायक अध्यापक" }
+  ],
+  "कंप्यूटर": [
+    { "photo": "images/sp.jpg", "name": "श्री एस.पी. थपलियाल", "post": "कंप्यूटर शिक्षक" },
+    { "photo": "images/raghuvir.jpg", "name": "श्री रघुवीर बिष्ट", "post": "कंप्यूटर शिक्षक" },
+    { "photo": "images/avnish.jpg", "name": "श्री अवनीश पाण्डेय", "post": "कंप्यूटर शिक्षक" },
+    { "photo": "images/aadesh.jpg", "name": "श्री आदेश कुमार", "post": "कंप्यूटर शिक्षक" },
+    { "photo": "images/mayank.jpg", "name": "श्री मयंक कुमार", "post": "कंप्यूटर शिक्षक" },
+    { "photo": "images/sunita.jpg", "name": "श्रीमती सुनीता", "post": "कंप्यूटर शिक्षक" },
+    { "photo": "images/deepak.jpg", "name": "श्री दीपक", "post": "कंप्यूटर शिक्षक" },
+    { "photo": "images/kamal.jpg", "name": "श्री कमल किशोर सिंह", "post": "कंप्यूटर शिक्षक" },
+    { "photo": "images/rajesh.jpg", "name": "श्री राजेश कुमार", "post": "कंप्यूटर शिक्षक" }
+  ],
+  "लिपिक": [
+    { "photo": "images/rajkumar.jpg", "name": "श्री राज कुमार गुप्ता", "post": "लिपिक" },
+    { "photo": "images/babita.jpg", "name": "श्रीमती बबीता त्यागी", "post": "लिपिक" },
+    { "photo": "images/ravindra.jpg", "name": "श्री रविन्द्र कुमार कश्यप", "post": "लिपिक" },
+    { "photo": "images/manoj.jpg", "name": "श्री मनोज कुमार", "post": "लिपिक" }
+  ],
+  "चतुर्थ_श्रेणी": [
+    { "photo": "images/dolly.jpg", "name": "श्रीमती डॉली", "post": "परिचारिका" },
+    { "photo": "images/narendra.jpg", "name": "श्री नरेन्द्र कुमार", "post": "चतुर्थ श्रेणी कर्मचारी" },
+    { "photo": "images/mohit.jpg", "name": "श्री मोहित शर्मा", "post": "चतुर्थ श्रेणी कर्मचारी" },
+    { "photo": "images/arvind.jpg", "name": "श्री अरविन्द कुमार", "post": "चतुर्थ श्रेणी कर्मचारी" },
+    { "photo": "images/manoj_mishra.jpg", "name": "श्री मनोज कुमार मिश्र", "post": "चतुर्थ श्रेणी कर्मचारी" },
+    { "photo": "images/praveen.jpg", "name": "श्री प्रवीण कुमार", "post": "चतुर्थ श्रेणी कर्मचारी" },
+    { "photo": "images/arvind_gupta.jpg", "name": "श्री अरविन्द गुप्ता", "post": "चतुर्थ श्रेणी कर्मचारी" },
+    { "photo": "images/ritu.jpg", "name": "श्रीमती रीतु गुप्ता", "post": "चतुर्थ श्रेणी कर्मचारी" }
+  ],
+  "माली": [
+    { "photo": "images/shatrohan.jpg", "name": "श्री शत्रोहन", "post": "माली" }
+  ]
+}
